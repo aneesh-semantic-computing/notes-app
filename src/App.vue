@@ -46,7 +46,7 @@ const removeNote = (id) => {
         <div class="modal">
           <p @click="(newNote = ''); (errorMessage = ''); showModal = false">x</p>
           <textarea name="note" id="note" cols="30" rows="10" v-model.trim="newNote"></textarea>
-          <p v-if="errorMessage">{{errorMessage}}</p>
+          <p v-if="errorMessage" class="error-message">{{errorMessage}}</p>
           <button @click="addNote">Add note</button>
         </div>
       </div>
@@ -101,7 +101,7 @@ header button {
 }
 .card {
   width: 225px;
-  height: 225px;
+  min-height: 225px;
   background-color: rgb(237, 182,44);
   padding: 10px;
   border-radius: 15px;
@@ -138,24 +138,11 @@ header button {
     font-size: 75px;
   }
 
-  .card {
-    width: 225px;
-    height: 225px;
-    background-color: rgb(237, 182, 44);
-    padding: 10px;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin-right: 20px;
-    margin-bottom: 20px;
-  }
-
   .card .close-button {
     color: black;
     margin-left: auto;
     font-size: 20px;
-    z-index: 100000;
+    z-index: 10;
     cursor: pointer;
   }
 
@@ -203,7 +190,7 @@ header button {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    z-index: 999;
   }
 
   main {
@@ -246,10 +233,29 @@ header button {
     cursor: pointer;
   }
 
+  .modal .error-message {
+    color: red;
+    font-size: 20px;
+    margin-top: 7px;
+  }
+
   textarea {
     width: 100%;
     height: 200px;
     padding: 5px;
     font-size: 20px;
+  }
+
+  @media only screen and (max-width: 480px) {
+    .card {
+      width: 100%;
+      margin-right: 0.1rem;
+    }
+  }
+
+  @media only screen and (min-width: 480px) and (max-width: 768px) {
+    .card {
+      margin-right: 1rem;
+    }
   }
 </style>
